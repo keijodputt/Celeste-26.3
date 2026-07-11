@@ -1,6 +1,6 @@
 name: Celeste
 version: 2.0
-api-version: 1.14
+api-version: '26.2'
 author: Idrees
 main: com.idreesinc.celeste.Celeste
 

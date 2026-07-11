@@ -42,10 +42,10 @@ public class CelestialSphere {
         Vector direction = new Vector(new Random().nextDouble() * 2 - 1, new Random().nextDouble() * -0.75d, new Random().nextDouble() * 2 - 1);
         direction.normalize();
         double speed = new Random().nextDouble() * 2 + 0.75;
-        location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, starLocation, 0, direction.getX(),
+        location.getWorld().spawnParticle(Particle.FIREWORK, starLocation, 0, direction.getX(),
                 direction.getY(), direction.getZ(), speed, null, true);
         if (new Random().nextDouble() >= 0.5) {
-            location.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, starLocation, 0, direction.getX(),
+            location.getWorld().spawnParticle(Particle.POOF, starLocation, 0, direction.getX(),
                     direction.getY(), direction.getZ(), speed, null, true);
         }
         if (celeste.getConfig().getBoolean("debug")) {

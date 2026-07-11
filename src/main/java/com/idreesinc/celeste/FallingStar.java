@@ -35,10 +35,10 @@ public class FallingStar extends BukkitRunnable {
 
     public void run() {
         double step = 1;
-        location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location.getX(), y, location.getZ(),
+        location.getWorld().spawnParticle(Particle.FIREWORK, location.getX(), y, location.getZ(),
                 0,  0,  new Random().nextDouble(), 0,
                 0.2, null, true);
-        location.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, location.getX(),
+        location.getWorld().spawnParticle(Particle.FIREWORK, location.getX(),
                 y + new Random().nextDouble() * step,
                 location.getZ(),
                 0,  0, -1, 0,
