@@ -26,30 +26,33 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
-      - name: Locate Artifact
-        id: find_jar
+      - name: Generate UTC timestamp
+        id: timestamp
+        run: echo "build_tag=$(date -u +'%Y%m%dT%H%M%SZ')" >> $GITHUB_OUTPUT
+
+      - name: Package final artifact
+        id: package_jar
         run: |
-          JAR_PATH=$(find target dist -maxdepth 1 -name "*.jar" ! -name "original-*.jar" 2>/dev/null | head -n 1)
-          if [ -z "$JAR_PATH" ]; then
-            echo "No jar file was found." >&2
+          RAW_JAR=$(find target dist -maxdepth 1 -name "*.jar" ! -name "original-*.jar" 2>/dev/null | head -n 1)
+          if [ -z "$RAW_JAR" ]; then
+            echo "Error: no generated jar found in target or dist directories." >&2
             exit 1
           fi
-          echo "jar_file=$JAR_PATH" >> $GITHUB_OUTPUT
-          echo "JAR found: $JAR_PATH"
+          FINAL_NAME="Celeste-26.3-${{ steps.timestamp.outputs.build_tag }}.jar"
+          cp "$RAW_JAR" "target/$FINAL_NAME"
+          echo "jar_path=target/$FINAL_NAME" >> $GITHUB_OUTPUT
+          echo "jar_name=$FINAL_NAME" >> $GITHUB_OUTPUT
+          echo "Prepared release artifact: target/$FINAL_NAME"
 
-      - name: Generate timestamp
-        id: timestamp
-        run: echo "build_tag=$(date -u +'%y%m%dT%H%M%SZ')" >> $GITHUB_OUTPUT
-
-      - name: Create GitHub Release
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: 26.3-${{ steps.timestamp.outputs.build_tag }}
           name: Celeste 26.3 (${{ steps.timestamp.outputs.build_tag }})
           body: |
-            Celeste autocompile for Purpur / Paper 26.3.
-            Timestamp UTC: ${{ steps.timestamp.outputs.build_tag }}
+            Automated build for Purpur / Paper 26.3.
+            Artifact: ${{ steps.package_jar.outputs.jar_name }}
             Commit: ${{ github.sha }}
-          files: ${{ steps.find_jar.outputs.jar_file }}
+          files: ${{ steps.package_jar.outputs.jar_path }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
