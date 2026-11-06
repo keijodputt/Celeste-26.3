@@ -1,21 +1,40 @@
-# Celeste - Add shooting stars to your Minecraft server
-Celeste is a simple plugin that adds shooting stars to your Minecraft server. Inspired by the shooting stars from Animal Crossing and the falling stars from Breath of the Wild, this plugin brings some celestial ambience to your Minecraft world.
+# Celeste 26.3
 
-[Check out the overview video](https://www.youtube.com/watch?v=TXdrECjVTiU)
+Celeste is a Paper/Purpur plugin that brings shooting stars, falling stars,
+meteor showers, and celestial events to Minecraft servers.
 
-[Download the server plugin on Spigot](https://www.spigotmc.org/resources/celeste.81862/)
+This repository is a maintained fork adapted for Minecraft 26.3 and current
+Paper/Purpur servers.
 
-[Learn more about Celeste (the plugin, not the owl)](https://idreesinc.com/about-celeste.html?utm_source=github&utm_medium=readme&utm_campaign=celeste)
+## Project lineage
 
-<a href="https://discord.gg/6yxE9prcNc" target="_blank">
-	<img alt="Discord" src="https://img.shields.io/discord/1398471368403583120?logo=discord&logoColor=fff&label=discord&color=5865F2">
-</a>
+Celeste 26.3 is based on:
+
+- [IdreesInc/Celeste](https://github.com/IdreesInc/Celeste), the original
+  Celeste plugin.
+- [jaredlyon/Celeste-26.2](https://github.com/jaredlyon/Celeste-26.2), which
+  updated the original project for Minecraft 26.2.
+
+This fork continues that work for Minecraft 26.3, preserving the original
+Celeste concept and functionality, while adding some nice features from related plugins/mods.
+
+This work is intended solely for my own F&F (Family and Friends) server, but it's publicly 
+shared for anyone to grab and fork.
+
+The original authors and contributors remain credited for their respective
+work. See the repository history and LICENSE for details.
 
 ## Features
-- Add shooting stars to the night sky, with configurable frequency
-- Find rare falling stars that deliver precious materials in a sparkling package
-- Watch meteor showers that occur every new moon, increasing the rate of shooting and falling stars
 
+- Configurable shooting stars across the night sky
+- Falling stars with configurable loot and experience rewards
+- Meteor showers during new moons
+- Per-world configuration overrides
+- Administrative commands for summoning and configuring celestial events
+- Paper/Purpur 26.3 compatibility
+- Automated builds through GitHub Actions
+
+  
 ![Shooting stars and a falling star in the corner](/images/meteor_shower.gif)
 
 ### Shooting stars
@@ -26,6 +45,17 @@ To more accurately emulate real world meteors, these virtual shooting stars vary
 
 ### Falling stars
 Inspired by the star fragments from The Legend of Zelda: Breath of the Wild, these rare stars are fall from the sky only once or twice a night! They are marked by a streak of light and resonating sound as they fall towards the earth, and once they land the stars spark and sizzle for 10 seconds by default to help players find them. They can be easy to miss, with players only knowing one has fallen by the distinctly resonating sound they make on impact. But if a player is lucky enough to find one, they may receive a rare treasure as well as some experience! This loot is completely customizable, and the documentation for that can be found further below.
+
+### Wishing and Luck
+
+A wishing mechanic inspired by
+[Celestia: Shooting Stars](https://modrinth.com/mod/celestia-sky) is being built into this fork.
+
+Celestia allows players to make a wish when a shooting star crosses near
+their line of sight, granting a temporary Luck effect. The goal is to adapt
+that concept for Celeste using native Paper/Purpur APIs while keeping the
+feature suitable for server-side use.
+
 
 ## In-Depth Functionality
 Shooting stars and falling stars spawn on a per-world basis. This means that the number of players in a world does not affect the spawning rate. When either type of star is given a chance to spawn, the plugin will find a random player within that world and center the spawn in a large radius around said player, in order to avoid sending stars to unloaded chunks where they would never be found.
