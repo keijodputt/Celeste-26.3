@@ -26,6 +26,9 @@ public class CelesteConfig {
     public WeightedRandomBag<String> fallingStarSimpleLoot;
     public String fallingStarLootTable;
 
+    public boolean wishLuckEnabled;
+    public int wishLuckDurationTicks;
+
     public CelesteConfig(ConfigurationSection section) {
         // Used to build the global config
         buildFromConfigurationSection(section);
@@ -60,6 +63,9 @@ public class CelesteConfig {
         if (section.isSet("falling-stars-loot")) {
             fallingStarSimpleLoot = calculateSimpleLoot(section.getConfigurationSection("falling-stars-loot"));
         }
+
+        wishLuckEnabled = section.getBoolean("wish-luck-enabled", true);
+        wishLuckDurationTicks = section.getInt("wish-luck-duration-ticks", 1200);
     }
 
     private void buildFromConfigurationSectionWithGlobal(ConfigurationSection section, CelesteConfig globalConfig) {
@@ -81,6 +87,9 @@ public class CelesteConfig {
         fallingStarsVolume = section.getDouble("falling-stars-volume", globalConfig.fallingStarsVolume);
         fallingStarsSparkTime = section.getInt("falling-stars-spark-time", globalConfig.fallingStarsSparkTime);
         fallingStarsExperience = section.getInt("falling-stars-experience", globalConfig.fallingStarsExperience);
+
+        wishLuckEnabled = section.getBoolean("wish-luck-enabled", globalConfig.wishLuckEnabled);
+        wishLuckDurationTicks = section.getInt("wish-luck-duration-ticks", globalConfig.wishLuckDurationTicks);
 
         if (section.isSet("falling-stars-loot") || section.isSet("falling-stars-loot-table")) {
             // Ensure that neither type of loot is inherited from the global config if any overrides are used

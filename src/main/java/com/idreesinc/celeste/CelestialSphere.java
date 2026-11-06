@@ -48,6 +48,7 @@ public class CelestialSphere {
             location.getWorld().spawnParticle(Particle.POOF, starLocation, 0, direction.getX(),
                     direction.getY(), direction.getZ(), speed, null, true);
         }
+        WishingStar.tryGrantWishes(celeste, starLocation, direction, speed);
         if (celeste.getConfig().getBoolean("debug")) {
             celeste.getLogger().info("Shooting star at " + stringifyLocation(starLocation) + " in world " + starLocation.getWorld().getName());
         }

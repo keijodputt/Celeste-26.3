@@ -21,4 +21,6 @@ shooting-stars-per-minute-during-meteor-showers: 15
 falling-stars-per-minute-during-meteor-showers: 0.3
 shooting-stars-summon-text: "Make a wish!"
 falling-stars-summon-text: "Make a wish!"
+wish-luck-enabled: true
+wish-luck-duration-ticks: 1200
 debug: false
