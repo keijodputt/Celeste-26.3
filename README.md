@@ -75,6 +75,10 @@ check-for-updates: true
 shooting-stars-enabled: true
 # Whether to spawn falling stars or not
 falling-stars-enabled: true
+# Wether to enable Wish Luck or not
+wish-luck-enabled: true
+# For how many ticks will the player be lucky (fishing loot). 20 ticks: 1 second
+wish-luck-duration-ticks: 6000
 # When to begin spawning shooting and falling stars
 begin-spawning-stars-time: 13000
 # When to stop spawning shooting and falling stars
