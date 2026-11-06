@@ -33,7 +33,10 @@ jobs:
       - name: Package final artifact
         id: package_jar
         run: |
-          RAW_JAR=$(find target dist -maxdepth 1 -name "*.jar" ! -name "original-*.jar" 2>/dev/null | head -n 1)
+          # Several historical jars are committed to dist/, so select the most
+          # recently modified jar (the one this build just produced) instead of
+          # relying on filesystem listing order
+          RAW_JAR=$(find target dist -maxdepth 1 -name "*.jar" ! -name "original-*.jar" -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -n 1 | cut -d' ' -f2-)
           if [ -z "$RAW_JAR" ]; then
             echo "Error: no generated jar found in target or dist directories." >&2
             exit 1
